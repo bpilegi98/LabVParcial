@@ -1,7 +1,9 @@
 package com.utn.TP_Final.service;
 
 
+import com.utn.TP_Final.exceptions.TelephoneLineNotExistsException;
 import com.utn.TP_Final.model.Call;
+import com.utn.TP_Final.projections.LineNumberAndCallsReceived;
 import com.utn.TP_Final.projections.UserAndPriceOfLastCall;
 import com.utn.TP_Final.repository.CallRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,5 +44,13 @@ public class CallService {
 
     public UserAndPriceOfLastCall findUserAndPriceOfLastCall(){
         return callRepository.getUserAndPriceOfLastCall();
+    }
+
+    public LineNumberAndCallsReceived getLineNumberAndCallsReceived(String lineNumber) throws TelephoneLineNotExistsException
+    {
+        String telephoneLine = callRepository.getLineNumberAndCallsReceived(lineNumber).getLineNumber();
+
+        if(telephoneLine == null) throw new TelephoneLineNotExistsException("That line number doesn't exist");
+        return callRepository.getLineNumberAndCallsReceived(lineNumber);
     }
 }

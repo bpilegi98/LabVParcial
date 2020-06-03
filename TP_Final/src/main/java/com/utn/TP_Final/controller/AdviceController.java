@@ -1,6 +1,7 @@
 package com.utn.TP_Final.controller;
 
 import com.utn.TP_Final.dto.ErrorResponseDto;
+import com.utn.TP_Final.exceptions.TelephoneLineNotExistsException;
 import com.utn.TP_Final.exceptions.ValidationException;
 import com.utn.TP_Final.exceptions.WrongPrefixException;
 import org.springframework.dao.DataAccessException;
@@ -29,6 +30,13 @@ public class AdviceController extends ResponseEntityExceptionHandler {
     @ExceptionHandler(WrongPrefixException.class)
     @ResponseStatus(HttpStatus.EXPECTATION_FAILED)
     public ErrorResponseDto wrongPrefixExceptionHandler(WrongPrefixException e){
+        return new ErrorResponseDto(e.getMessage());
+    }
+
+    @ExceptionHandler(TelephoneLineNotExistsException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorResponseDto telephoneLineNotExistsExceptionHandler(TelephoneLineNotExistsException e)
+    {
         return new ErrorResponseDto(e.getMessage());
     }
 

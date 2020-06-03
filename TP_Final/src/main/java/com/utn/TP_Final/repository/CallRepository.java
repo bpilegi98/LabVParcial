@@ -1,7 +1,9 @@
 package com.utn.TP_Final.repository;
 
 
+import com.utn.TP_Final.exceptions.TelephoneLineNotExistsException;
 import com.utn.TP_Final.model.Call;
+import com.utn.TP_Final.projections.LineNumberAndCallsReceived;
 import com.utn.TP_Final.projections.UserAndPriceOfLastCall;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -24,5 +26,12 @@ public interface CallRepository extends JpaRepository<Call, Integer> {
             " order by c.id desc" +
             " limit 1;",nativeQuery = true)
    UserAndPriceOfLastCall getUserAndPriceOfLastCall();
+
+
+    @Query(value = "select t.line_number as LineNumber, count(c.id) as CallsReceived from calls c" +
+            " inner join telephone_lines t" +
+            " on c.destination_number = t.line_number" +
+            " where c.destination_number = ?1", nativeQuery = true)
+    LineNumberAndCallsReceived getLineNumberAndCallsReceived(String lineNumber) throws TelephoneLineNotExistsException;
 
 }
