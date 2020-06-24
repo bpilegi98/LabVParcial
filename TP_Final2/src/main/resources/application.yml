@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/parcialLab
+    username: root
+    password:
+  jpa:
+    hibernate:
+      #ddl-auto: update
+      generate-ddl: false
+      show-sql: true
+     # naming:
+      #  physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
+server:
+  port: 8081
