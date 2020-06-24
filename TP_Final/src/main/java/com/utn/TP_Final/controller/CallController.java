@@ -1,6 +1,7 @@
 package com.utn.TP_Final.controller;
 
 
+import com.utn.TP_Final.exceptions.TelephoneLineHasNotCalls;
 import com.utn.TP_Final.exceptions.TelephoneLineNotExistsException;
 import com.utn.TP_Final.model.Call;
 import com.utn.TP_Final.projections.LineNumberAndCallsReceived;
@@ -47,8 +48,7 @@ public class CallController {
     }
 
     @GetMapping("/lineNumberAndReceivedCalls/{lineNumber}")
-    public LineNumberAndCallsReceived getLineNumberAndReceivedCalls(@PathVariable() String lineNumber) throws TelephoneLineNotExistsException
-    {
+    public LineNumberAndCallsReceived getLineNumberAndReceivedCalls(@PathVariable() String lineNumber) throws TelephoneLineNotExistsException, TelephoneLineHasNotCalls {
         return callService.getLineNumberAndCallsReceived(lineNumber);
     }
 }

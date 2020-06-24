@@ -1,6 +1,7 @@
 package com.utn.TP_Final.controller;
 
 import com.utn.TP_Final.dto.ErrorResponseDto;
+import com.utn.TP_Final.exceptions.TelephoneLineHasNotCalls;
 import com.utn.TP_Final.exceptions.TelephoneLineNotExistsException;
 import com.utn.TP_Final.exceptions.ValidationException;
 import com.utn.TP_Final.exceptions.WrongPrefixException;
@@ -38,6 +39,13 @@ public class AdviceController extends ResponseEntityExceptionHandler {
     public ErrorResponseDto telephoneLineNotExistsExceptionHandler(TelephoneLineNotExistsException e)
     {
         return new ErrorResponseDto(e.getMessage());
+    }
+
+    @ExceptionHandler(TelephoneLineHasNotCalls.class)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public ErrorResponseDto telephoneLineHasNotCalls(TelephoneLineHasNotCalls e)
+    {
+        return new ErrorResponseDto("That telephone line hasn't calls.");
     }
 
 }

@@ -79,9 +79,10 @@ duration_secs int,
 total_cost float,
 total_price float,
 id_invoice int,
-source_city_id int,
-destination_city_id int,
+id_source_city int,
+id_destination_city int,
 constraint fk_invoice foreign key (id_invoice) references invoices(id),
-constraint fk_source_city_call foreign key (source_city_id) references cities(id),
-constraint fk_destination_city_call foreign key (destination_city_id) references cities(id)
+constraint fk_source_city_call foreign key (id_source_city) references cities(id),
+constraint fk_destination_city_call foreign key (id_destination_city) references cities(id)
 );
+

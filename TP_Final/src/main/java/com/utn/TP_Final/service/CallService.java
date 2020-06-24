@@ -1,6 +1,7 @@
 package com.utn.TP_Final.service;
 
 
+import com.utn.TP_Final.exceptions.TelephoneLineHasNotCalls;
 import com.utn.TP_Final.exceptions.TelephoneLineNotExistsException;
 import com.utn.TP_Final.model.Call;
 import com.utn.TP_Final.projections.LineNumberAndCallsReceived;
@@ -46,11 +47,13 @@ public class CallService {
         return callRepository.getUserAndPriceOfLastCall();
     }
 
-    public LineNumberAndCallsReceived getLineNumberAndCallsReceived(String lineNumber) throws TelephoneLineNotExistsException
+    public LineNumberAndCallsReceived getLineNumberAndCallsReceived(String lineNumber) throws TelephoneLineNotExistsException, TelephoneLineHasNotCalls
     {
-        String telephoneLine = callRepository.getLineNumberAndCallsReceived(lineNumber).getLineNumber();
-
-        if(telephoneLine == null) throw new TelephoneLineNotExistsException("That line number doesn't exist");
-        return callRepository.getLineNumberAndCallsReceived(lineNumber);
+        if((callRepository.getLineNumberAndCallsReceived(lineNumber)) == null || callRepository.getLineNumberAndCallsReceived(lineNumber).getCallsReceived() == 0)
+        {
+            throw new TelephoneLineHasNotCalls(); //excepcion de no_content
+        }
+        //uso del orElseThrow()
+        return Optional.ofNullable(callRepository.getLineNumberAndCallsReceived(lineNumber)).orElseThrow(()-> new TelephoneLineNotExistsException("That line number doesn't exist"));
     }
 }

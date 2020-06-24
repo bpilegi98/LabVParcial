@@ -1,5 +1,6 @@
 package com.utn.TP_Final.service;
 
+import com.utn.TP_Final.exceptions.TelephoneLineHasNotCalls;
 import com.utn.TP_Final.exceptions.TelephoneLineNotExistsException;
 import com.utn.TP_Final.model.Call;
 import com.utn.TP_Final.model.City;
@@ -37,7 +38,7 @@ public class CallServiceTest {
     }
 
     @Test
-    public void getLineNumberAndReceivedCallsTest() throws TelephoneLineNotExistsException {
+    public void getLineNumberAndReceivedCallsTest() throws TelephoneLineNotExistsException, TelephoneLineHasNotCalls {
         List<Call> calls = new ArrayList<Call>();
 
         City city1 = new City(1,"Mar del Plata", "223", null, null);
