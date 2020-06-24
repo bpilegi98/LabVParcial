@@ -1,4 +1,4 @@
-/*
+
 package com.utn.TP_Final.repository;
 
 
@@ -15,4 +15,4 @@ public interface CountryRepository extends JpaRepository<Country, Integer> {
     @Query(value = "select * from countries where name = ?1", nativeQuery = true)
     List<Country> findByName(String name);
 }
- */
+

@@ -1,19 +1,39 @@
 package com.utn.TP_Final2.controller;
 
 
-import com.utn.TP_Final2.service.CountryService;
 import com.utn.TP_Final2.model.Country;
+//import com.utn.TP_Final2.service.CountryService;
+import com.utn.TP_Final2.service.IntegrationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController("")
 @RequestMapping("/country")
 public class CountryController {
 
+    private final IntegrationService integrationService;
+
+    @Autowired
+    public CountryController(IntegrationService integrationService) {
+        this.integrationService = integrationService;
+    }
+
+    @GetMapping("/")
+    public List<Country> getAll()
+    {
+        return integrationService.getCountry();
+    }
+
+    @GetMapping("/{id}")
+    public Country getById(@RequestParam Integer id)
+    {
+        return integrationService.getCountryById(id);
+    }
+
+
+    /*
     private final CountryService countryService;
 
     @Autowired
@@ -38,4 +58,5 @@ public class CountryController {
     {
         return countryService.findById(id);
     }
+     */
 }

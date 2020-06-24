@@ -3,15 +3,20 @@ package com.utn.TP_Final.controller;
 
 //import com.utn.TP_Final.service.CountryService;
 import com.utn.TP_Final.model.Country;
+import com.utn.TP_Final.service.CountryService;
 import com.utn.TP_Final.service.IntegrationService;
-        import org.springframework.web.bind.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController("")
 @RequestMapping("/country")
 public class CountryController {
 
+     /*
     private final IntegrationService integrationService;
 
     public CountryController(IntegrationService integrationService) {
@@ -29,8 +34,8 @@ public class CountryController {
     {
         return integrationService.getCountryById(id);
     }
+ */
 
-    /*
     private final CountryService countryService;
 
     @Autowired
@@ -55,5 +60,5 @@ public class CountryController {
     {
         return countryService.findById(id);
     }
- */
+
 }

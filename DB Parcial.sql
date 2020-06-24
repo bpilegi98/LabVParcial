@@ -59,7 +59,7 @@ constraint fk_user_telephone_line foreign key (id_user) references users(id)
 create table invoices(
 id int auto_increment primary key,
 calls int,
-cost float,
+total_cost float,
 total_price float,
 date_creation date,
 date_expiration date,
